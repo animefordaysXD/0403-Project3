@@ -45,6 +45,10 @@
     }
 .badges {
 	width: 100px;
+	height: 98px;		
+}
+.badges:hover{
+cursor: pointer;
 }
 
 .starIcon1 {
@@ -139,6 +143,39 @@
         droplets.forEach(droplet => droplet.classList.remove('droplet-animate'));
       }, 1000);
     }
+  
+  
+  document.addEventListener('DOMContentLoaded', () => {
+	  // Get all badge elements and the popup elements
+	  const badges = document.querySelectorAll('.badges');
+	  const popup = document.getElementById('popup');
+	  const popupContent = document.getElementById('popup-content');
+	  const closePopupButton = document.getElementById('close-popup');
+
+	  // Function to show the popup with the badge content
+	  function showPopup(badgeNumber) {
+	    popupContent.textContent = `You clicked on badge ${badgeNumber}`;
+	    popup.style.display = 'block';
+	  }
+
+	  // Function to hide the popup
+	  function hidePopup() {
+	    popup.style.display = 'none';
+	  }
+
+	  // Add click event listeners to the badge elements
+	  badges.forEach(badge => {
+	    badge.addEventListener('click', () => {
+	      const badgeNumber = badge.getAttribute('data-badge');
+	      showPopup(badgeNumber);
+	    });
+	  });
+
+	  // Add a click event listener to the close button
+	  closePopupButton.addEventListener('click', hidePopup);
+	});
+  
+  
   </script>
 <body>
 	<div id="wrap">
@@ -166,11 +203,20 @@
 									</div>
 								</div>
 								<div id="badge" style="display: flex;">
-									<div>BADGES</div>
+									
 									<div class="innerbadges" style="display: flex;">
-										<div class="badges" style="background-color: green;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
-										<div class="badges" style="background-color: blue;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
-										<div class="badges" style="background-color: purple;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
+										<div class="badges" data-badge="1" style="background-color: green;background: url(resources/mypage/images/1.png) no-repeat;background-size: cover;"></div>
+  										<div class="badges" data-badge="2" style="background-color: blue;background: url(resources/mypage/images/2.png) no-repeat;background-size: cover;"></div>
+  										<div class="badges" data-badge="3" style="background-color: purple;background: url(resources/mypage/images/3.png) no-repeat;background-size: cover;"></div>
+										
+										
+										<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid black;
+										width:1000px;height:1000px;background-color: rgba(255,255,255,0.3);z-index: 999;
+										
+										">
+  											<p id="popup-content">Badge content</p>
+  											<button id="close-popup">Close</button>
+										</div>
 									</div>
 								</div>
 								<div id="wateringCan"
