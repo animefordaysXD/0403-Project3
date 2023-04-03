@@ -24,6 +24,122 @@
 	crossorigin="anonymous">
 <title>내프로필</title>
 </head>
+<style type="text/css">
+#wateringButton:hover {
+	cursor: pointer;
+}
+
+#wateringButton:hover i {
+	cursor: pointer;
+	animation: moveArrow 0.5s linear !important;
+}
+@keyframes moveArrow {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+.badges {
+	width: 100px;
+}
+
+.starIcon1 {
+	position: absolute !important;
+	top: 612px;
+	left: 239px;
+	width: 20px;
+	height: 20px;
+	color: yellow;
+}
+
+.starIcon2 {
+	position: absolute !important;
+	top: 630px;
+	left: 127px;
+	width: 20px;
+	height: 20px;
+	color: yellow;
+}
+
+.starIcon3 {
+	position: absolute !important;
+	top: 695px;
+	left: 200px;
+	width: 20px;
+	height: 20px;
+	color: yellow;
+}
+
+    .faucet-shake {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      40%, 60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+
+    /* Droplet animations */
+    .droplet {
+      display: none;
+      opacity: 0;
+      position: absolute;
+    }
+
+    .droplet-animate {
+      position: absolute;
+      display: inline-block;
+      top:550px;
+      left:220px;
+      animation: fall 1s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+    }
+</style>
+<script>
+  function animateFaucetAndDroplets() {
+	  const faucet = document.getElementById('wateringCan');
+      const droplets = document.querySelectorAll('.droplet');
+      faucet.classList.add('faucet-shake');
+      
+      droplets.forEach((droplet, index) => {
+        setTimeout(() => {
+          droplet.classList.add('droplet-animate');
+        }, index * 200);
+      });
+
+      setTimeout(() => {
+        faucet.classList.remove('faucet-shake');
+        droplets.forEach(droplet => droplet.classList.remove('droplet-animate'));
+      }, 1000);
+    }
+  </script>
 <body>
 	<div id="wrap">
 		<header>
@@ -39,7 +155,7 @@
 							style="margin-bottom: 50px; background-color: black; color: #F8F8F8">내프로필</h2>
 						<div id="wrapper_inner">
 							<div id="pictureandbadgeandflower"
-								style="background-color: black;">
+								style="background-color: black; display: flex; flex-direction: column; align-items: center;">
 								<div class="wrapper_picture" style="background-color: black;">
 									<div class="item_picture">
 										<div class="polaroid">
@@ -49,33 +165,49 @@
 										</div>
 									</div>
 								</div>
-								<div id="badge">
-								<div>BADGES</div>
-								<div class="innerbadges">
-								<div style="background-color: green;">asdasd</div>
-								<div style="background-color: blue;">asdasd</div>
-								<div style="background-color: purple;">asdasd</div>
+								<div id="badge" style="display: flex;">
+									<div>BADGES</div>
+									<div class="innerbadges" style="display: flex;">
+										<div class="badges" style="background-color: green;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
+										<div class="badges" style="background-color: blue;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
+										<div class="badges" style="background-color: purple;background: url(resources/mypage/images/plant.png) no-repeat;">asdasd</div>
+									</div>
 								</div>
+								<div id="wateringCan"
+									style="background-color: pink; height: 100px; width: 100px; color: gray; font-size: 90px;">
+									<i class="fa-solid fa-faucet"></i>
+								</div>
+								<div class="droplet1 droplet" style="color: blue;">
+									<i class="fa-solid fa-droplet"></i>
+								</div>
+								<div class="droplet2 droplet" style="color: blue;">
+									<i class="fa-solid fa-droplet"></i>
+								</div>
+								<div class="droplet3 droplet" style="color: blue;">
+									<i class="fa-solid fa-droplet"></i>
 								</div>
 								<div id="flowerandflowerbutton" style="background-color: black;">
-									<div id="flower" style="
-									background: url(resources/mypage/images/rdd.jpg) no-repeat;
-									color: white;
-									"
-									
-									
-									>FLOWER
-									
+									<div id="flower"
+										style="background: url(resources/mypage/images/plant.png) no-repeat; color: white;">
+										FLOWER
+										<div class="starIcon1"
+											style="width: 20px; height: 20px; color: yellow;">
+											<i class="fa-solid fa-star fa-beat-fade"></i>
+										</div>
+										<div class="starIcon2"
+											style="width: 20px; height: 20px; color: yellow;">
+											<i class="fa-solid fa-star fa-beat-fade"></i>
+										</div>
+										<div class="starIcon3"
+											style="width: 20px; height: 20px; color: yellow;">
+											<i class="fa-solid fa-star fa-beat-fade"></i>
+										</div>
 									</div>
 									<button type="button"
-									style="width:300px;height:30px;margin: 0 auto;
-									background-color:rgba(0,62,255,0.7);color:#fff;
-									 border-radius: 8px;
-									 border: 1px solid white;
-									 
-									">
-									출석체크!
-									<i class="fa-solid fa-droplet" id="wateringButton"></i></button>
+										style="width: 300px; height: 30px; margin: 0 auto; background-color: rgba(0, 62, 255, 0.7); color: #fff; border-radius: 8px; border: 1px solid white;"
+										id="wateringButton" onclick="animateFaucetAndDroplets()">
+										출석체크! <i class="fa-solid fa-right-long" class="attendanceArrow "></i>
+									</button>
 									<!-- <div id="flowerbutton">
 								<input type="button" value="물주기" id="watering" />
 							</div> -->
@@ -155,3 +287,4 @@
 	</div>
 </body>
 </html>
+
