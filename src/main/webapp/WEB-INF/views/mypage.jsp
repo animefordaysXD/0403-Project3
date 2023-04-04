@@ -125,8 +125,73 @@ cursor: pointer;
         transform: translateY(100px);
       }
     }
+   .hiddenBadges {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+    .imageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+#close-popup{
+width:300px;
+height:40px;
+background-color: rgba(20, 217, 190, 0.5);
+color: rgba(252, 23, 27, 1);
+margin-left:245px;
+margin-top:244px;
+}
+#close-popup:hover{
+cursor:pointer;
+background-color: rgba(15, 138, 121, 0.3);
+}
+div[data-badge="1"] {
+  background: url(resources/mypage/images/1.png) no-repeat;background-size: cover;
+}
+div[data-badge="2"] {
+  background: url(resources/mypage/images/2.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="3"] {
+  background: url(resources/mypage/images/3.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="4"] {
+  background: url(resources/mypage/images/4.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="5"] {
+  background: url(resources/mypage/images/5.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="6"] {
+  background: url(resources/mypage/images/6.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="7"] {
+  background: url(resources/mypage/images/7.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="8"] {
+  background: url(resources/mypage/images/8.png) no-repeat;background-size: cover;
+}
+
+div[data-badge="9"] {
+  background: url(resources/mypage/images/9.png) no-repeat;background-size: cover;
+}
+
+
+
 </style>
 <script>
+
+var selected = "";
   function animateFaucetAndDroplets() {
 	  const faucet = document.getElementById('wateringCan');
       const droplets = document.querySelectorAll('.droplet');
@@ -144,36 +209,89 @@ cursor: pointer;
       }, 1000);
     }
   
-  
   document.addEventListener('DOMContentLoaded', () => {
-	  // Get all badge elements and the popup elements
-	  const badges = document.querySelectorAll('.badges');
+	  const badgeNumbers = [4, 2, 3]; // Array of badge numbers
+	  
+	  // Get all badge elements and the popup elements after they have been created
 	  const popup = document.getElementById('popup');
 	  const popupContent = document.getElementById('popup-content');
 	  const closePopupButton = document.getElementById('close-popup');
+	  const badges = document.querySelectorAll('.badges');
+	  const hiddenBadges = document.querySelectorAll('.hiddenBadges');
+	 
+	 
+	 
 
 	  // Function to show the popup with the badge content
-	  function showPopup(badgeNumber) {
-	    popupContent.textContent = `You clicked on badge ${badgeNumber}`;
-	    popup.style.display = 'block';
-	  }
+	 
+	
 
-	  // Function to hide the popup
-	  function hidePopup() {
-	    popup.style.display = 'none';
-	  }
+		  // Function to hide the popup
+		 
 
-	  // Add click event listeners to the badge elements
-	  badges.forEach(badge => {
-	    badge.addEventListener('click', () => {
-	      const badgeNumber = badge.getAttribute('data-badge');
-	      showPopup(badgeNumber);
-	    });
-	  });
+		  // Add click event listeners to the badge elements
+	
 
-	  // Add a click event listener to the close button
-	  closePopupButton.addEventListener('click', hidePopup);
+
+		  // Add click event listeners to the hidden badge elements
+		  hiddenBadges.forEach(hiddenBadge => {
+		    hiddenBadge.addEventListener('click', () => {
+		     
+		       
+		        hidePopup();
+		      
+		    });
+		  });
+
+		  // Add a click event listener to the close button
+		  closePopupButton.addEventListener('click', hidePopup);
 	});
+  function showPopup() {
+		 
+	    popup.style.display = 'flex';
+	    
+	  }
+  function hidePopup() {
+	    popup.style.display = 'none';
+	    selected = "";
+	  }
+  function setLoc1(){
+		selected="1";
+		showPopup();
+	  }
+	  function setLoc2(){
+			selected="2";
+			showPopup();
+		  }
+	  function setLoc3(){
+			selected="3";
+			showPopup();
+		  }
+  
+  
+  function setBadge(button){
+	  var getBadge = button.getAttribute('data-badge');
+	 
+	  if (selected=="1") {
+		  const element = document.querySelector('.badges#badges1');
+		  element.dataset.badge = getBadge;
+		}
+	  if (selected=="2") {
+		  const element = document.querySelector('.badges#badges2');
+		  element.dataset.badge = getBadge;
+		}
+	  if (selected=="3") {
+		  const element = document.querySelector('.badges#badges3');
+		  element.dataset.badge = getBadge;
+		}
+		  
+	  
+	  
+	  
+  }
+  
+ 
+
   
   
   </script>
@@ -204,23 +322,33 @@ cursor: pointer;
 								</div>
 								<div id="badge" style="display: flex;">
 									
-									<div class="innerbadges" style="display: flex;">
-										<div class="badges" data-badge="1" style="background-color: green;background: url(resources/mypage/images/1.png) no-repeat;background-size: cover;"></div>
-  										<div class="badges" data-badge="2" style="background-color: blue;background: url(resources/mypage/images/2.png) no-repeat;background-size: cover;"></div>
-  										<div class="badges" data-badge="3" style="background-color: purple;background: url(resources/mypage/images/3.png) no-repeat;background-size: cover;"></div>
-										
+									<div id="innerbadges" class="innerbadges" style="display: flex;">
+										 <div class="badges" id="badges1" data-badge="1" onclick="setLoc1()"></div>
+  										<div class="badges"  id="badges2" data-badge="2" onclick="setLoc2()"></div>
+  										<div class="badges"  id="badges3" data-badge="3" onclick="setLoc3()"></div>
+										 
 										
 										<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid black;
-										width:1000px;height:1000px;background-color: rgba(255,255,255,0.3);z-index: 999;
+										width:1000px;height:800px;background-color: rgba(255,255,255,0.3);z-index: 999;flex-direction: column;
 										
 										">
-  											<p id="popup-content">Badge content</p>
-  											<button id="close-popup">Close</button>
+										<div class="imageGrid">
+  											    <div class="hiddenBadges" data-badge="1" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="2" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="3" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="4" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="5" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="6" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="7" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="8" onclick="setBadge(this)"></div>
+  												<div class="hiddenBadges" data-badge="9" onclick="setBadge(this)"></div>
+  											</div>
+  											<button id="close-popup">닫기</button>
 										</div>
 									</div>
 								</div>
 								<div id="wateringCan"
-									style="background-color: pink; height: 100px; width: 100px; color: gray; font-size: 90px;">
+									style="height: 100px; width: 100px; color: gray; font-size: 90px;">
 									<i class="fa-solid fa-faucet"></i>
 								</div>
 								<div class="droplet1 droplet" style="color: blue;">
